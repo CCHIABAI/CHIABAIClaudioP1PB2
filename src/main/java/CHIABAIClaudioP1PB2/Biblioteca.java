@@ -137,5 +137,19 @@ public class Biblioteca
         else // No es posible prestar el libro
             return false;
     }
+    
+    
+    // IMPRIMIR ========================================
+    public String impirmirLibros()
+    {
+       String result = " - Impresiones ----------------\n";
+       
+        for (Libro libro : libros)
+          {
+            if (libro.isFotocopiable())
+                result += libro.toString() + "\";
+          }
+    
 
+    }    
 }

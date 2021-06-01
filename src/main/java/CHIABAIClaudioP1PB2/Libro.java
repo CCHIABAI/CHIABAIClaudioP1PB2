@@ -13,13 +13,15 @@ package CHIABAIClaudioP1PB2;
  */
 public class Libro {
      String codigo;
+     String tipo;
      String nombre;
      String autor;
      Estudiante estudiante;
 
-    public Libro(String codigo, String nombre, String autor)
+    public Libro(String codigo, String tipo, String nombre, String autor)
     {
         this.codigo = codigo;
+        this.tipo = tipo;
         this.nombre = nombre;
         this.autor = autor;
         estudiante  = null;

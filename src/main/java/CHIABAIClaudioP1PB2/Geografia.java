@@ -15,7 +15,7 @@ public class Geografia extends Libro {
 
     public Geografia(String codigo, String nombre, String autor)
     {
-        super(codigo, nombre, autor);
+        super(codigo, "Geografia" , nombre, autor);
     }
 
     @Override

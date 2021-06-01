@@ -15,7 +15,7 @@ public class Historia extends Libro {
 
     public Historia(String codigo, String nombre, String autor)
     {
-        super(codigo, nombre, autor);
+        super(codigo, "Historia", nombre, autor);
     }
 
     @Override
