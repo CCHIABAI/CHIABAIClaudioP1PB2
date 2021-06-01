@@ -13,10 +13,10 @@ package CHIABAIClaudioP1PB2;
  */
 public class Prestamo {
         Integer id;
-        Estudiante estudiante;
-        Libro libro;
+        Integer estudiante;
+        String  libro;
 
-    public Prestamo(Integer id, Estudiante estudiante, Libro libro)
+    public Prestamo(Integer id, Integer estudiante, String libro)
     {
         this.id = id;
         this.estudiante = estudiante;
@@ -28,14 +28,16 @@ public class Prestamo {
         return id;
     }
 
-    public Estudiante getEstudiante()
+    public Integer getEstudiante()
     {
         return estudiante;
     }
 
-    public Libro getLibro()
+    public String getLibro()
     {
         return libro;
     }
+
+    
 
 }
