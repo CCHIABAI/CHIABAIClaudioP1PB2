@@ -18,7 +18,9 @@ public class Biblioteca {
      ArrayList<Libro> libros;
      ArrayList<Prestamo> prestamos;
      Integer prestamoID = 0; // Incremental -------------------
-
+     final Integer MAX_PRESTAMOS = 2;
+     final Integer NO_PRESTADO = -1;
+     
     // Constructor ==========================
     public Biblioteca()
     {
@@ -64,43 +66,78 @@ public class Biblioteca {
           
         return null; 
     }        
-    
             
     // PRESTAMOS ================================================
-    // True: si el prestamo es posible y ejecutado, False: en caso contrario
-    public Boolean prestarLibro(String codigo, Integer estudianteDNI)
+    // Averiguar si el libro fue prestado ---------------------
+    // NO_PRESTADO si no est aprestado el libro, en caso contrario devuelve 
+    // el indice del prestamo. (NO el ID)
+    public Integer isLibroPrestado(String codigo)
     {
-       Boolean exito = false; 
-       // Buscar el libro --------------- 
-       Libro libro = getLibro(codigo);
-       
-       if (libro != null)
-         {
-           // No esta prestado?
-           if (!isLibroPrestado(codigo))
-             {
-               prestamoID ++;
-               prestamos.add(new Prestamo(prestamoID, codigo, estudianteDNI));
-               return true;
-             }   
-
-         } 
-       else return false;
-         
+        for (int i = 0; i < prestamos.size(); i++)
+          {
+           // Buscar si hay un libro con un codigo igual? 
+            if (prestamos.get(i).getLibro().equals(codigo))
+               return i;
+          }
+          
+        return NO_PRESTADO;
     }        
     
-    // Averiguar si el libro fue prestado ---------------------
-    // true si lo esta, falso en caso contrario.
-    public Boolean isLibroPrestado(String codigo)
+    
+    // Verificar si el estudiante llego al maximo de prestamos -------------------------
+    // TODO:  La verificacion de un maximo de 2 libros podría hacerse por otro medio más simple.
+    public Integer cantidadPrestamos(Integer estudianteDNI)
     {
+        Integer cantidad = 0;
+        
         for (Prestamo prestamo : prestamos)
           {
            // Buscar si hay un libro con un codigo igual? 
-            if (prestamo.getLibro().getCodigo().equals(codigo))
-               return true;
+            if (prestamo.getEstudiante().equals(estudianteDNI))
+               cantidad++;
           }
-          
-        return false;
+        
+        return cantidad;
+    }        
+
+    // Hacer un prestamo ---------------------------------------
+    // True: si el prestamo es posible y ejecutado, False: en caso contrario
+    public Boolean prestarLibro(String codigo, Integer estudianteDNI)
+    {
+       // Buscar el libro --------------- 
+       Libro libro = getLibro(codigo);
+       
+       
+       if (libro != null)
+         {
+           // No esta prestado y el estudiante no alcanzo el maximo?
+           if ((isLibroPrestado(codigo) != NO_PRESTADO) && 
+               (cantidadPrestamos(estudianteDNI) > MAX_PRESTAMOS))
+             {
+               prestamoID++;
+               prestamos.add(new Prestamo(prestamoID, codigo, estudianteDNI));
+               return true;
+             }   
+         } 
+      
+       // No es posible prestar el libro
+       return false;         
+    }        
+    
+    // Hacer un prestamo ---------------------------------------
+    // True: si el prestamo es posible y ejecutado, False: en caso contrario
+    public Boolean devolucionLibro(String codigo)
+    {
+       Boolean exito = false; 
+       // No esta prestado?
+       if (isLibroPrestado(codigo))
+        {
+          prestamos.add(new Prestamo(prestamoID, codigo, estudianteDNI));
+               return true;
+             }   
+
+       // No es posible prestar el libro
+       return false;         
     }        
     
 
