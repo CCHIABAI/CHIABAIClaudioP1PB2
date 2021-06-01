@@ -21,6 +21,7 @@ public class Estudiante {
         this.DNI = DNI;
         this.apellido = apellido;
         this.nombre = nombre;
+        
     }
 
     public Integer getDNI()
@@ -37,5 +38,6 @@ public class Estudiante {
     {
         return nombre;
     }
+
 
 }

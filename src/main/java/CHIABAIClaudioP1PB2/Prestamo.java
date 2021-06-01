@@ -16,7 +16,7 @@ public class Prestamo {
         Integer estudiante;
         String  libro;
 
-    public Prestamo(Integer id, Integer estudiante, String libro)
+    public Prestamo(Integer id, String libro, Integer estudiante)
     {
         this.id = id;
         this.estudiante = estudiante;
