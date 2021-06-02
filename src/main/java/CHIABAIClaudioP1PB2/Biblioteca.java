@@ -18,6 +18,8 @@ public class Biblioteca
 
     ArrayList<Libro> libros;
     ArrayList<Prestamo> prestamos;
+    ArrayList<Estudiante> estudiantes;
+    
     Integer prestamoID = 0; // Incremental -------------------
     final Integer MAX_PRESTAMOS = 2;
     final Integer NO_PRESTADO = -1;
@@ -27,7 +29,31 @@ public class Biblioteca
     {
         libros = new ArrayList<>();
         prestamos = new ArrayList<>();
+        estudiantes = new ArrayList<>();
     }
+    
+    // Estudiantes ============================================
+    // Agregar un nuevo usuario de la bibliteca
+    // Nota: Aunque no es necesario esto ya que maneja DNI solo 
+    // y el resto de los datos no se usa, lo implemento para dejar constancia.
+    // TODOD debe estar registrado para poder prestarle un libro.,
+    //             registrarEstudiante() 
+    public Boolean addEstudiante(Estudiante estudianteNuevo)
+    {
+        Boolean encontrado = false;
+        for (Estudiante estudiante : estudiantes)
+          {
+            if (estudiante.getDNI() == estudianteNuevo.getDNI())
+                encontrado = true;
+          }
+        
+        if (!encontrado)
+          {
+            estudiantes.add(estudianteNuevo);
+            return true;
+          }
+        else return false;        
+    }        
 
     // Libros =========================================
     // Agregar un nuevo libro -------------------------------

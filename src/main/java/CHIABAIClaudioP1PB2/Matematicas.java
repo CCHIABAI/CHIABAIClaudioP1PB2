@@ -13,7 +13,7 @@ package CHIABAIClaudioP1PB2;
  */
 public class Matematicas extends Libro {
 
-    public Matematicas(String codigo, String tipo, String nombre, String autor)
+    public Matematicas(String codigo, String nombre, String autor)
     {
         super(codigo, "Matematicas", nombre, autor);
     }
