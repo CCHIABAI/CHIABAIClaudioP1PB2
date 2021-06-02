@@ -17,20 +17,17 @@ import static org.junit.Assert.*;
  */
 public class BibliotecaTest
 {
-    
+
     public BibliotecaTest()
     {
     }
 
-    /**
-     * Test of addLibro method, of class Biblioteca.
-     */
     @Test
     public void testAddLibro()
     {
         Biblioteca instance = new Biblioteca();
-        
-        assertTrue(instance.addLibro(new Libro("G01", "generico", "EL principito", "Saint de algo en frances")));
+
+        assertTrue(instance.addLibro(new Libro("-01", "generico", "EL principito", "Saint de algo en frances")));
         assertTrue(instance.addLibro(new Historia("H01", "El principito en la historia", "No es de Saint de algo en frances")));
         assertTrue(instance.addLibro(new Matematicas("M01", "¿Cuantos principitos hay?", "Tampoco de Saint de algo en frances")));
         assertTrue(instance.addLibro(new Geografia("G01", "¿donde vivia El principito?", "Saint de otra cosa en frances")));
@@ -47,7 +44,7 @@ public class BibliotecaTest
     public void testGetLibro()
     {
         Biblioteca instance = new Biblioteca();
-        
+
         instance.addLibro(new Libro("G01", "generico", "EL principito", "Saint de algo en frances"));
         instance.addLibro(new Historia("H01", "El principito en la historia", "No es de Saint de algo en frances"));
         instance.addLibro(new Matematicas("M01", "¿Cuantos principitos hay?", "Tampoco de Saint de algo en frances"));
@@ -55,72 +52,51 @@ public class BibliotecaTest
         // Recuperar un libro ------------------
         Libro libro = instance.getLibro("G01");
         assertEquals("G01", libro.getCodigo());
-        
+
     }
 
-    /**
-     * Test of isLibroPrestado method, of class Biblioteca.
-     */
-    @Test
-    public void testIsLibroPrestado()
-    {
-        System.out.println("isLibroPrestado");
-        String codigo = "";
-        Biblioteca instance = new Biblioteca();
-        Integer expResult = null;
-        Integer result = instance.isLibroPrestado(codigo);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of cantidadPrestamos method, of class Biblioteca.
-     */
-    @Test
-    public void testCantidadPrestamos()
-    {
-        System.out.println("cantidadPrestamos");
-        Integer estudianteDNI = null;
-        Biblioteca instance = new Biblioteca();
-        Integer expResult = null;
-        Integer result = instance.cantidadPrestamos(estudianteDNI);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of prestarLibro method, of class Biblioteca.
-     */
     @Test
     public void testPrestarLibro()
     {
-        System.out.println("prestarLibro");
-        String codigo = "";
-        Integer estudianteDNI = null;
         Biblioteca instance = new Biblioteca();
-        Boolean expResult = null;
-        Boolean result = instance.prestarLibro(codigo, estudianteDNI);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
+        instance.addLibro(new Libro("G01", "generico", "EL principito", "Saint de algo en frances"));
+        instance.addLibro(new Historia("H01", "El principito en la historia", "No es de Saint de algo en frances"));
+        instance.addLibro(new Matematicas("M01", "¿Cuantos principitos hay?", "Tampoco de Saint de algo en frances"));
+
+        //Estudiante estudiante = new Estudiante(25226349, "CHIABAI", "Claudio");
+        // Prestar ----------------------------------------
+        assertTrue(instance.prestarLibro("G01", 25226349));
+        assertTrue(instance.prestarLibro("H01", 25226349));
+
+        // Probar que no se peude más de dos prestamos -------------------
+        assertFalse(instance.prestarLibro("M01", 25226349));
     }
 
-    /**
-     * Test of devolucionLibro method, of class Biblioteca.
-     */
     @Test
     public void testDevolucionLibro()
     {
-        System.out.println("devolucionLibro");
-        String codigo = "";
         Biblioteca instance = new Biblioteca();
-        Boolean expResult = null;
-        Boolean result = instance.devolucionLibro(codigo);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
+        instance.addLibro(new Libro("G01", "generico", "EL principito", "Saint de algo en frances"));
+        instance.addLibro(new Historia("H01", "El principito en la historia", "No es de Saint de algo en frances"));
+        instance.addLibro(new Matematicas("M01", "¿Cuantos principitos hay?", "Tampoco de Saint de algo en frances"));
+
+        //Estudiante estudiante = new Estudiante(25226349, "CHIABAI", "Claudio");
+        // Prestar ----------------------------------------
+        assertTrue(instance.prestarLibro("G01", 25226349));
+        assertTrue(instance.prestarLibro("H01", 25226349));
+
+        // Devolver -----------------------------
+        assertTrue(instance.devolucionLibro("G01"));
+        
+        // Probar devolver uno NO prestado 
+        assertFalse(instance.devolucionLibro("M01"));
     }
-    
+
+    @Test
+    public void testRegistrarEstudiante()
+    {
+    }
+
 }

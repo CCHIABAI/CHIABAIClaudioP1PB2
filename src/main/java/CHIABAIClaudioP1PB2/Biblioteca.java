@@ -93,6 +93,7 @@ public class Biblioteca
     }
 
     // PRESTAMOS ================================================
+    
     // Averiguar si el libro fue prestado ---------------------
     // NO_PRESTADO si no est aprestado el libro, en caso contrario devuelve 
     // el indice del prestamo. (NO el ID)
@@ -173,9 +174,9 @@ public class Biblioteca
         for (Libro libro : libros)
           {
             if (libro.isFotocopiable())
-                result += libro.toString() + "\";
+                result += libro.toString() + "\n";
           }
     
-
+        return result;
     }    
 }
